@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة KING السيبرانية</title>
-    <meta name="description" content="المنصة السيبرانية الرسمية للورد زايرو - تصفح الأدوات والبوتات المتاحة">
-    <meta name="keywords" content="منصة king السيبرانية, king-zyros, اللورد زايرو, بوت كينج">
+    <title>KING PLATFORM v2.0</title>
+    <meta name="description" content="المنصة السيبرانية الرسمية للورد KING - التحكم والأدوات">
+    <meta name="keywords" content="منصة king, king platform, اللورد king, z-eye, zyros">
     <style>
-        /* هندسة النظام المظلم وتصفير الأبعاد */
+        /* تأسيس شاشة الهكر المركزية */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         body {
-            background-color: #030305;
-            color: #ffffff;
+            background-color: #030a05;
+            color: #00ff66;
             overflow: hidden;
             min-height: 100vh;
             display: flex;
@@ -26,151 +26,325 @@
             position: relative;
         }
 
-        /* سيرفر الجزيئات المتحركة بالخلفية */
-        #particles-js {
+        /* جدار المصفوفة الرقمية الخلفية (Matrix Grid) */
+        #matrix-bg {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             z-index: 1;
+            opacity: 0.15;
         }
 
-        /* حاوية المنصة الملكية المتوهجة */
-        .cyber-card {
+        /* تأثير خطوط الشاشة الزجاجية المتوهجة (Scanlines) */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(0, 255, 100, 0.03), rgba(0, 0, 0, 0.1), rgba(0, 255, 100, 0.03));
+            z-index: 10;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* حاوية التلفاز السيبراني (CRT Terminal Monitor) */
+        .crt-container {
             position: relative;
             z-index: 2;
-            width: 90%;
-            max-width: 440px;
-            background: rgba(8, 8, 12, 0.9);
-            border: 2px solid #ff003c;
-            border-radius: 16px;
-            padding: 35px 25px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.25), inset 0 0 20px rgba(255, 0, 60, 0.1);
-            backdrop-filter: blur(12px);
-            border-image: linear-gradient(to bottom, #ff003c, #70001d) 1;
+            width: 95%;
+            max-width: 550px;
+            background: #000000;
+            border: 4px solid #00ff66;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 0 35px rgba(0, 255, 102, 0.3), inset 0 0 20px rgba(0, 255, 102, 0.2);
         }
 
-        /* شعار الجمجمة النيون */
-        .cyber-logo {
-            font-size: 55px;
-            margin-bottom: 15px;
-            animation: glitchPulse 2.5s infinite alternate;
-            display: inline-block;
+        /* شريط التحكم العلوي للمنظومة */
+        .system-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #00ff66;
+            border-bottom: 1px dashed #00ff66;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
-        /* عنوان المنصة الرئيسي */
-        .cyber-title {
+        .sys-dots { display: flex; gap: 6px; }
+        .sys-dot { width: 8px; height: 8px; border-radius: 50%; background: #00ff66; opacity: 0.4; }
+        .sys-dot.active { opacity: 1; box-shadow: 0 0 8px #00ff66; }
+
+        /* تجميعة شعار جمجمة شانكس النيون العجيبة */
+        .logo-area {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shanks-skull {
+            font-size: 70px;
+            position: relative;
+            animation: floatGlow 3s infinite alternate;
+            user-select: none;
+        }
+
+        /* الشخطات الثلاثة (ندبة شانكس) فوق العين اليسرى */
+        .shanks-scar {
+            position: absolute;
+            top: 22px;
+            right: 20px;
+            width: 15px;
+            height: 22px;
+            display: flex;
+            gap: 2.5px;
+            transform: rotate(12deg);
+            pointer-events: none;
+        }
+
+        .scar-line {
+            width: 2.5px;
+            height: 100%;
+            background: #ff003c;
+            box-shadow: 0 0 8px #ff003c, 0 0 12px #ff003c;
+            border-radius: 2px;
+        }
+
+        /* النصوص والعناوين النيون */
+        .main-title {
             font-size: 32px;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: 3px;
-            margin-bottom: 8px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-        }
-
-        /* العنوان الفرعي الناري */
-        .cyber-subtitle {
-            font-size: 13px;
-            color: #ff003c;
-            margin-bottom: 35px;
-            text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
             font-weight: bold;
-            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 0 0 15px #00ff66;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
         }
 
-        /* منظومة الأزرار الهجومية */
-        .btn-matrix {
+        .sub-title {
+            font-size: 14px;
+            color: #00ff66;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .status-badge {
+            font-size: 11px;
+            color: #00ff66;
+            background: rgba(0, 255, 102, 0.07);
+            border: 1px solid #00ff66;
+            padding: 5px 15px;
+            display: inline-block;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
+        }
+
+        /* مصفوفة الكتل والأزرار الاحترافية */
+        .grid-matrix {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 20px;
         }
 
-        .cyber-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 15px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffffff;
-            background: rgba(255, 0, 60, 0.02);
-            border: 1px solid #ff003c;
+        .cyber-box {
+            display: block;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ff66;
             border-radius: 8px;
-            cursor: pointer;
+            padding: 15px;
+            color: #00ff66;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 15px;
+            font-weight: bold;
             position: relative;
-            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.05);
         }
 
-        /* تأثير التوهج عند تمرير الإصبع أو الماوس */
-        .cyber-btn:hover {
-            background: #ff003c;
+        /* زوايا التحديد الاحترافية البرمجية */
+        .cyber-box::before, .cyber-box::after {
+            content: ""; position: absolute; width: 10px; height: 10px; border-color: #00ff66; border-style: solid; opacity: 0.7;
+        }
+        .cyber-box::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+        .cyber-box::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+        .cyber-box span {
+            display: block;
+            font-size: 11px;
+            color: #ffffff;
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+
+        /* تأثير التوهج الممتد عند اللمس */
+        .cyber-box:hover {
+            background: #00ff66;
             color: #000000;
-            box-shadow: 0 0 25px #ff003c;
-            transform: translateY(-4px);
-            font-weight: 900;
+            box-shadow: 0 0 25px #00ff66;
+            transform: translateY(-3px);
+        }
+        .cyber-box:hover span {
+            color: #000000;
+            opacity: 0.8;
         }
 
-        /* تذييل الصفحة وحقوق اللورد */
-        .cyber-footer {
-            margin-top: 40px;
+        /* صندوق الهدية المنبثق الفخم (Popup window) */
+        .gift-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+        .gift-overlay.open { opacity: 1; pointer-events: auto; }
+
+        .gift-popup {
+            background: #000;
+            border: 3px solid #ff003c;
+            padding: 30px 20px;
+            width: 90%; max-width: 420px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 0 30px #ff003c;
+            transform: scale(0.7); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gift-overlay.open .gift-popup { transform: scale(1); }
+
+        .gift-popup h2 { color: #ff003c; margin-bottom: 15px; font-size: 22px; text-shadow: 0 0 10px #ff003c; }
+        .gift-popup p { color: #fff; font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
+        
+        .close-gift-btn {
+            background: #ff003c; color: #fff; border: none; padding: 10px 25px;
+            font-weight: bold; cursor: pointer; border-radius: 4px; box-shadow: 0 0 10px #ff003c;
+        }
+
+        /* تذييل المنصة الحصري لبث الحماية */
+        .system-footer {
+            margin-top: 35px;
             font-size: 10px;
-            color: #555566;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            color: #00441a;
+            font-weight: bold;
+            border-top: 1px solid #00220a;
+            padding-top: 15px;
         }
 
-        /* أنيميشن النبض النيوني للوجو */
-        @keyframes glitchPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255, 0, 60, 0.5)); }
-            100% { transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(255, 0, 60, 0.9)); }
+        /* أنيميشن الطفو والارتعاش النيوني للشعار */
+        @keyframes floatGlow {
+            0% { transform: translateY(0px); filter: drop-shadow(0 0 8px rgba(0,255,102,0.6)); }
+            100% { transform: translateY(-8px); filter: drop-shadow(0 0 22px rgba(0,255,102,0.9)); }
         }
     </style>
 </head>
 <body>
 
-    <div id="particles-js"></div>
+    <canvas id="matrix-bg"></canvas>
 
-    <div class="cyber-card">
-        <div class="cyber-logo">☠️</div>
-        <h1 class="cyber-title">🥷 KING 🥷</h1>
-        <p class="cyber-subtitle">المنصة السيبرانية الرسمية للورد زايرو</p>
+    <div class="crt-container" style="text-align: center;">
+        <div class="system-bar">
+            <div class="sys-dots"><span class="sys-dot"></span><span class="sys-dot"></span><span class="sys-dot active"></span></div>
+            <span>ZYROS_CORE_v2.06.exe</span>
+        </div>
 
-        <div class="btn-matrix">
-            <a href="https://t.me/King1500hackBOT" target="_blank" class="cyber-btn">
+        <div class="logo-area">
+            <div class="shanks-skull">☠️</div>
+            <div class="shanks-scar">
+                <span class="scar-line"></span>
+                <span class="scar-line"></span>
+                <span class="scar-line"></span>
+            </div>
+        </div>
+
+        <h1 class="main-title">🥷 KING 🥷</h1>
+        <p class="sub-title">المنصة السيبرانية الرسمية للورد KING</p>
+        <div class="status-badge">CORE STATUS: ACTIVE // NO_VPN_BYPASS [ONLINE]</div>
+
+        <div class="grid-matrix">
+            <a href="https://t.me/King1500hackBOT" target="_blank" class="cyber-box">
                 🤖 تشغيل بوت المساعد الملكي
+                <span>LAUNCH KING BOT</span>
             </a>
-            <a href="https://t.me/FXK_I" target="_blank" class="cyber-btn">
-                👑 التواصل المباشر مع اللورد
+
+            <div onclick="openGift()" class="cyber-box" style="border-color: #00ff66; color: #00ff66;">
+                🎁 الهدية الملكية: اطلب أدواتك البايثون
+                <span>OPEN GIFT BOX . . .</span>
+            </div>
+
+            <a href="https://t.me/FXK_I" target="_blank" class="cyber-box">
+                👑 التواصل المباشر مع اللورد KING
+                <span>CONTACT LORD KING</span>
             </a>
         </div>
 
-        <div class="cyber-footer">
-            © 2026 ZYROS MATRIX. DEVELOPMENT BY LORD ZAYROS.
+        <div class="system-footer">
+            © 2026 ZYROS MATRIX // SECURE CONNECTION APPLIED TO LORD KING.
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <div id="giftOverlay" class="gift-overlay" onclick="closeGiftOutside(event)">
+        <div class="gift-popup">
+            <h2>🎁 الهدية الملكية الخاصة 🎁</h2>
+            <p>هديتك هي أي أداة بايثون تفكر بها سأصنعها لك، فقط راسل مطور البوت واطلبها الآن سيدي.</p>
+            <button class="close-gift-btn" onclick="goToDeveloper()">مراسلة المطور فوراً</button>
+        </div>
+    </div>
+
     <script>
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 90, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ff003c" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.4, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 140, "color": "#ff003c", "opacity": 0.25, "width": 1 },
-                "move": { "enable": true, "speed": 2.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
-                "modes": { "repulse": { "distance": 90, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+        // كود نظام الـ Matrix المتساقط بالخلفية
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const alphabet = "010101010101010101010101010101010101";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const rainDrops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(3, 10, 5, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
             }
-        });
+        }
+        setInterval(drawMatrix, 30);
+
+        // أوامر التحكم بالنافذة المنبثقة للهدية
+        function openGift() {
+            document.getElementById('giftOverlay').classList.add('open');
+        }
+        function closeGift() {
+            document.getElementById('giftOverlay').classList.remove('open');
+        }
+        function closeGiftOutside(e) {
+            if(e.target.id === 'giftOverlay') closeGift();
+        }
+        function goToDeveloper() {
+            window.open('https://t.me/FXK_I', '_blank');
+            closeGift();
+        }
     </script>
 </body>
 </html>
