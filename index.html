@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING PLATFORM v2.0</title>
-    <meta name="description" content="المنصة السيبرانية الرسمية للورد KING - التحكم والأدوات">
-    <meta name="keywords" content="منصة king, king platform, اللورد king, z-eye, zyros">
+    <title>KING PLATFORM v2.5</title>
+    <meta name="description" content="المنصة السيبرانية الرسمية للورد KING">
     <style>
-        /* نظام الشاشة والتحكم المظلم */
+        /* تأسيس الشاشة السحابية المظلمة */
         * {
             margin: 0;
             padding: 0;
@@ -16,7 +15,7 @@
         }
 
         body {
-            background-color: #020503;
+            background-color: #020502;
             color: #00ff66;
             overflow-x: hidden;
             overflow-y: auto;
@@ -25,10 +24,10 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 20px 0;
+            padding: 40px 0;
         }
 
-        /* مصفوفة الخلفية الرقمية المتساقطة */
+        /* مصفوفة الـ Matrix الخلفية المتساقطة */
         #matrix-bg {
             position: fixed;
             width: 100%;
@@ -36,37 +35,37 @@
             top: 0;
             left: 0;
             z-index: 1;
-            opacity: 0.12;
+            opacity: 0.08;
             pointer-events: none;
         }
 
-        /* تأثير خطوط الشاشة الزجاجية (CRT Scanlines) */
+        /* تأثير خطوط زجاج التلفاز القديم المتوهج (CRT Scanlines) */
         body::before {
             content: " ";
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
             z-index: 10;
             background-size: 100% 4px;
             pointer-events: none;
         }
 
-        /* حاوية التلفاز السيبراني المتوهجة */
+        /* حاوية اللوحة المركزية (الإطار المتوهج الأخضر بالكامل) */
         .crt-container {
             position: relative;
             z-index: 2;
             width: 95%;
-            max-width: 500px;
-            background: rgba(0, 0, 0, 0.9);
+            max-width: 480px;
+            background: rgba(0, 0, 0, 0.95);
             border: 3px solid #00ff66;
-            border-radius: 24px;
-            padding: 25px 20px;
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.25), inset 0 0 20px rgba(0, 255, 102, 0.15);
+            border-radius: 28px;
+            padding: 30px 20px;
+            box-shadow: 0 0 35px rgba(0, 255, 102, 0.3), inset 0 0 20px rgba(0, 255, 102, 0.2);
             text-align: center;
         }
 
-        /* شريط النظام العلوي */
+        /* شريط النظام الداخلي العلوي */
         .system-bar {
             width: 100%;
             display: flex;
@@ -74,147 +73,171 @@
             align-items: center;
             font-size: 11px;
             color: #00ff66;
-            border-bottom: 1px dashed rgba(0, 255, 102, 0.3);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
+            border-bottom: 1px dashed rgba(0, 255, 102, 0.25);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
             opacity: 0.8;
         }
 
         .sys-dots { display: flex; gap: 6px; }
         .sys-dot { width: 7px; height: 7px; border-radius: 50%; background: #00ff66; opacity: 0.3; }
-        .sys-dot.active { opacity: 1; box-shadow: 0 0 8px #00ff66; background: #ff003c; }
+        .sys-dot.active { opacity: 1; box-shadow: 0 0 8px #ff003c; background: #ff003c; }
 
-        /* منطقة الهيدر الكبرى الفخمة (الجمجمة والنينجا والنار الخضراء) */
+        /* ================= المشهد السينمائي الحقيقي لجمجمة شانكس والنينجا والنار الخضراء ================= */
         .cyber-header-scene {
             position: relative;
             width: 100%;
-            height: 240px;
-            margin-bottom: 15px;
+            height: 250px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* خلفية لهب النيون الأخضر الديناميكي */
+        /* 1. ألسنة اللهب النيونية الخضراء الكثيفة في الخلفية الخلفية */
         .green-fire-bg {
             position: absolute;
-            width: 85%;
-            height: 95%;
-            background: radial-gradient(circle, rgba(0,255,102,0.2) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(10px);
-            animation: firePulse 2s infinite alternate;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://img.picgo.net/2024/03/19/green-fire-aura.png'), radial-gradient(circle, rgba(0,255,102,0.35) 0%, rgba(0,0,0,0) 75%);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: drop-shadow(0 0 20px #00ff66);
+            animation: firePulse 2.5s infinite alternate;
             z-index: 1;
         }
 
-        /* الجمجمة ثلاثية الأبعاد الفخمة وسط النيران */
-        .center-skull {
-            width: 150px;
-            height: 150px;
-            position: relative;
-            z-index: 3;
-            filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.8));
-            animation: floatGlow 3s infinite alternate;
+        /* 2. مقاتلي النينجا الفخمين (يمين ويسار) بالسيوف وبتفاصيل واقعية عالية خلف الجمجمة وامام النار */
+        .ninja-guard {
+            position: absolute;
+            bottom: -5px;
+            width: 160px;
+            height: 220px;
+            background-image: url('https://i.ibb.co/bRRm6vP/cyber-ninja.png'); /* رابط مباشر لصورة نينجا واقعي سيبراني يمسك السيف */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom center;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.6));
+            z-index: 2;
         }
 
-        /* شخطات ندبة شانكس الحمراء المتوهجة بدقة */
+        .ninja-left {
+            left: -20px;
+            transform: scaleX(-1); /* قلب النينجا الأيسر ليتطابق مع اتجاه الصورة ببراعة */
+        }
+
+        .ninja-right {
+            right: -20px;
+        }
+
+        /* 3. الجمجمة البشرية الواقعية الكبرى المتمركزة في المنتصف تماماً */
+        .center-skull {
+            width: 165px;
+            height: 165px;
+            background-image: url('https://i.ibb.co/vYm686Q/real-skull.png'); /* رابط مباشر لجمجمة بشرية حقيقية عالية الجودة */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            z-index: 3;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 102, 0.75));
+            animation: floatGlow 3.5s infinite alternate ease-in-out;
+        }
+
+        /* 4. ندبة شانكس الأسطورية الثلاثية الحمراء متوهجة بدقة ومحفورة فوق العين */
         .shanks-scar {
             position: absolute;
             top: 25px;
-            left: 42px; /* تم ضبطها بدقة فوق العين اليسرى للجمجمة */
-            width: 25px;
-            height: 35px;
+            right: 42px; /* ضبط التمركز والزاوية لتأتي فوق العين بضبط كالصورة الحقيقية */
+            width: 32px;
+            height: 45px;
             display: flex;
-            gap: 3px;
-            transform: rotate(-15deg);
+            gap: 3.5px;
+            transform: rotate(14deg);
             z-index: 4;
             pointer-events: none;
         }
 
         .scar-line {
-            width: 3px;
+            width: 3.5px;
             height: 100%;
             background: #ff003c;
-            box-shadow: 0 0 10px #ff003c, 0 0 15px #ff003c;
-            border-radius: 50%;
+            box-shadow: 0 0 12px #ff003c, 0 0 18px #ff003c;
+            border-radius: 4px;
         }
 
-        /* مقاتلي النينجا الواقعيين المحيطين بالجمجمة */
-        .ninja-guard {
-            position: absolute;
-            bottom: 10px;
-            width: 130px;
-            height: 180px;
-            z-index: 2;
-            opacity: 0.9;
-            filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.5));
+        /* تزيين أوراق الشجر النيون المحيطة بالاسم */
+        .leaf-decor {
+            font-size: 24px;
+            color: #00ff66;
+            opacity: 0.4;
+            display: inline-block;
+            vertical-align: middle;
+            text-shadow: 0 0 8px #00ff66;
         }
 
-        .ninja-left {
-            left: -15px;
-            transform: scaleX(-1); /* قلب النينجا الأيسر ليواجه الجمجمة */
-        }
-
-        .ninja-right {
-            right: -15px;
-        }
-
-        /* نصوص المنصة */
+        /* نصوص وعناوين المنصة الملكية */
         .main-title {
-            font-size: 34px;
+            font-size: 36px;
             font-weight: 900;
             color: #ffffff;
-            text-shadow: 0 0 20px #00ff66;
-            margin-bottom: 5px;
-            letter-spacing: 3px;
+            text-shadow: 0 0 25px #00ff66, 0 0 5px #ffffff;
+            margin: 5px 10px;
+            display: inline-block;
+            letter-spacing: 4px;
         }
 
         .sub-title {
-            font-size: 13px;
+            font-size: 14px;
             color: #00ff66;
             letter-spacing: 1.5px;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             font-weight: bold;
         }
 
         .status-badge {
             font-size: 11px;
             color: #00ff66;
-            background: rgba(0, 255, 102, 0.05);
-            border: 1px dashed #00ff66;
-            padding: 6px 16px;
+            background: rgba(0, 255, 102, 0.04);
+            border: 1px solid rgba(0, 255, 102, 0.4);
+            padding: 6px 18px;
             display: inline-block;
             margin-bottom: 25px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
         }
 
-        /* منظومة الأزرار المحاطة بإطارات التحديد */
+        /* هندسة وتوزيع أزرار الواجهة الفخمة */
         .grid-matrix {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
         }
 
         .cyber-box {
             display: block;
             width: 100%;
-            background: rgba(5, 15, 5, 0.75);
+            background: rgba(4, 12, 5, 0.85);
             border: 1.5px solid #00ff66;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 16px;
             color: #00ff66;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             position: relative;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset 0 0 8px rgba(0, 255, 102, 0.05);
         }
 
-        /* زوايا التحديد الاحترافية */
+        /* زوايا التحديد السيبرانية للأزرار */
         .cyber-box::before, .cyber-box::after {
             content: ""; position: absolute; width: 8px; height: 8px; border-color: #00ff66; border-style: solid;
         }
-        .cyber-box::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
-        .cyber-box::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+        .cyber-box::before { top: -1.5px; left: -1.5px; border-width: 2px 0 0 2px; }
+        .cyber-box::after { bottom: -1.5px; right: -1.5px; border-width: 0 2px 2px 0; }
 
         .cyber-box span {
             display: block;
@@ -225,38 +248,38 @@
             letter-spacing: 1px;
         }
 
-        /* تأثير التوهج الممتد عند اللمس واكتساح الإضاءة */
+        /* تأثير التوهج الضوئي الكثيف عند تمرير الماوس أو اللمس */
         .cyber-box:hover {
             background: #00ff66;
             color: #000000;
-            box-shadow: 0 0 25px #00ff66;
-            transform: scale(1.02);
+            box-shadow: 0 0 30px #00ff66;
+            transform: translateY(-2px);
         }
         .cyber-box:hover span {
             color: #000000;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
-        /* صندوق الهدية المنبثق السيبراني */
+        /* صندوق نافذة الهدية الملكية التفاعلي الجديد (Popup Window) */
         .gift-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             z-index: 100;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0; pointer-events: none;
             transition: all 0.3s ease-in-out;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(7px);
         }
         .gift-overlay.open { opacity: 1; pointer-events: auto; }
 
         .gift-popup {
-            background: #010a03;
+            background: #020703;
             border: 2px solid #ff003c;
-            padding: 30px 20px;
-            width: 88%; max-width: 400px;
+            padding: 35px 25px;
+            width: 90%; max-width: 400px;
             text-align: center;
             border-radius: 16px;
             box-shadow: 0 0 35px rgba(255, 0, 60, 0.4);
@@ -264,35 +287,34 @@
         }
         .gift-overlay.open .gift-popup { transform: scale(1); }
 
-        .gift-popup h2 { color: #ff003c; margin-bottom: 12px; font-size: 20px; text-shadow: 0 0 10px #ff003c; }
-        .gift-popup p { color: #fff; font-size: 13px; line-height: 1.6; margin-bottom: 25px; }
+        .gift-popup h2 { color: #ff003c; margin-bottom: 15px; font-size: 22px; text-shadow: 0 0 10px #ff003c; }
+        .gift-popup p { color: #fff; font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
         
         .close-gift-btn {
-            background: #ff003c; color: #fff; border: none; padding: 12px 28px;
+            background: #ff003c; color: #fff; border: none; padding: 12px 30px;
             font-weight: bold; cursor: pointer; border-radius: 6px; box-shadow: 0 0 15px #ff003c;
             font-family: 'Courier New', monospace;
         }
 
-        /* تذييل الصفحة وحفظ الحقوق للسرية */
+        /* حقوق التذييل المشفرة للمنظومة */
         .system-footer {
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 10px;
             color: #00441a;
             font-weight: bold;
-            border-top: 1px solid rgba(0, 255, 102, 0.1);
-            padding-top: 12px;
+            border-top: 1px solid rgba(0, 255, 102, 0.08);
+            padding-top: 15px;
         }
 
-        /* أنيميشن التوهج النبضي للّهب الخضر */
+        /* تأثيرات الحركة والطفو والنبض */
         @keyframes firePulse {
-            0% { transform: scale(0.9); opacity: 0.6; filter: blur(10px); }
-            100% { transform: scale(1.1); opacity: 1; filter: blur(6px); }
+            0% { transform: scale(0.96); opacity: 0.75; }
+            100% { transform: scale(1.04); opacity: 1; }
         }
 
-        /* أنيميشن حركة الجمجمة الطافية */
         @keyframes floatGlow {
-            0% { transform: translateY(0px); filter: drop-shadow(0 0 12px rgba(0,255,102,0.6)); }
-            100% { transform: translateY(-10px); filter: drop-shadow(0 0 25px rgba(0,255,102,0.9)); }
+            0% { transform: translateY(0px); filter: drop-shadow(0 0 15px rgba(0,255,102,0.6)); }
+            100% { transform: translateY(-8px); filter: drop-shadow(0 0 28px rgba(0,255,102,0.95)); }
         }
     </style>
 </head>
@@ -309,34 +331,24 @@
         <div class="cyber-header-scene">
             <div class="green-fire-bg"></div>
             
-            <svg class="ninja-guard ninja-left" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12C2 14.19 2.71 16.21 3.91 17.86L6.44 12.8C6.16 12.27 6 11.65 6 11C6 9.34 7.34 8 9 8C9.65 8 10.27 8.16 10.8 8.44L12 6L13.2 8.44C13.73 8.16 14.35 8 15 8C16.66 8 18 9.34 18 11C18 11.65 17.84 12.27 17.56 12.8L20.09 17.86C21.29 16.21 22 14.19 22 12C22 6.48 17.52 2 12 2Z" fill="#00ff66" opacity="0.3"/>
-                <path d="M12 9C10.34 9 9 10.34 9 12C9 12.35 9.06 12.69 9.17 13L7 17.34C8.24 18.39 9.85 19 11.62 19H12.38C14.15 19 15.76 18.39 17 17.34L14.83 13C14.94 12.69 15 12.35 15 12C15 10.34 13.66 9 12 9Z" fill="#00ff66"/>
-                <path d="M10 12H14M11 14H13" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <div class="ninja-guard ninja-left"></div>
 
-            <svg class="center-skull" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C7.03 2 3 6.03 3 11C3 13.56 4.07 15.87 5.79 17.5L5 21H7L8 19H16L17 21H19L18.21 17.5C19.93 15.87 21 13.56 21 11C21 6.03 16.97 2 12 2Z" fill="#0c1a0e" stroke="#00ff66" stroke-width="1.5"/>
-                <path d="M7.5 11C6.67 11 6 11.83 6 12.86C6 13.89 6.67 14.71 7.5 14.71C8.33 14.71 10 13.89 10 12.86C10 11.83 8.33 11 7.5 11Z" fill="#00ff66"/>
-                <path d="M16.5 11C15.67 11 14 11.83 14 12.86C14 13.89 15.67 14.71 16.5 14.71C17.33 14.71 18 13.89 18 12.86C18 11.83 17.33 11 16.5 11Z" fill="#00ff66"/>
-                <path d="M12 14.5L10.5 16.5H13.5L12 14.5Z" fill="#00ff66"/>
-                <path d="M9 18V19M11 18V19M13 18V19M15 18V19" stroke="#00ff66" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-
-            <div class="shanks-scar">
-                <span class="scar-line"></span>
-                <span class="scar-line"></span>
-                <span class="scar-line"></span>
+            <div class="center-skull">
+                <div class="shanks-scar">
+                    <span class="scar-line"></span>
+                    <span class="scar-line"></span>
+                    <span class="scar-line"></span>
+                </div>
             </div>
 
-            <svg class="ninja-guard ninja-right" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12C2 14.19 2.71 16.21 3.91 17.86L6.44 12.8C6.16 12.27 6 11.65 6 11C6 9.34 7.34 8 9 8C9.65 8 10.27 8.16 10.8 8.44L12 6L13.2 8.44C13.73 8.16 14.35 8 15 8C16.66 8 18 9.34 18 11C18 11.65 17.84 12.27 17.56 12.8L20.09 17.86C21.29 16.21 22 14.19 22 12C22 6.48 17.52 2 12 2Z" fill="#00ff66" opacity="0.3"/>
-                <path d="M12 9C10.34 9 9 10.34 9 12C9 12.35 9.06 12.69 9.17 13L7 17.34C8.24 18.39 9.85 19 11.62 19H12.38C14.15 19 15.76 18.39 17 17.34L14.83 13C14.94 12.69 15 12.35 15 12C15 10.34 13.66 9 12 9Z" fill="#00ff66"/>
-                <path d="M10 12H14M11 14H13" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <div class="ninja-guard ninja-right"></div>
         </div>
 
-        <h1 class="main-title">KING</h1>
+        <div>
+            <span class="leaf-decor">🌿</span>
+            <h1 class="main-title">KING</h1>
+            <span class="leaf-decor">🌿</span>
+        </div>
         <p class="sub-title">المنصة السيبرانية الرسمية للورد KING</p>
         <div class="status-badge">CORE STATUS: ACTIVE // NO_VPN_BYPASS [ONLINE]</div>
 
@@ -371,7 +383,7 @@
     </div>
 
     <script>
-        // كود نظام الـ Matrix المتساقط بالخلفية بدقة عالية
+        // نظام توليد الـ Matrix المتساقط بالخلفية تلقائياً
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -382,7 +394,7 @@
         const rainDrops = Array(Math.floor(columns)).fill(1);
 
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(2, 5, 3, 0.05)';
+            ctx.fillStyle = 'rgba(2, 5, 2, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#00ff66';
             ctx.font = fontSize + 'px monospace';
@@ -402,7 +414,7 @@
             canvas.height = window.innerHeight;
         });
 
-        // أوامر التحكم بنافذة الهدية التفاعلية
+        // تشغيل وإغلاق نافذة الهدية التفاعلية
         function openGift() {
             document.getElementById('giftOverlay').classList.add('open');
         }
