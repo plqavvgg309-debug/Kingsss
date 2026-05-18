@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING PLATFORM v2.5</title>
-    <meta name="description" content="المنصة السيبرانية الرسمية للورد KING">
+    <title>KING PLATFORM v3.5</title>
     <style>
-        /* تأسيس الشاشة السحابية المظلمة */
         * {
             margin: 0;
             padding: 0;
@@ -24,10 +22,10 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 40px 0;
+            padding: 20px 0;
         }
 
-        /* مصفوفة الـ Matrix الخلفية المتساقطة */
+        /* مصفوفة الماتريكس الخلفية */
         #matrix-bg {
             position: fixed;
             width: 100%;
@@ -39,7 +37,7 @@
             pointer-events: none;
         }
 
-        /* تأثير خطوط زجاج التلفاز القديم المتوهج (CRT Scanlines) */
+        /* خطوط الشاشة الزجاجية CRT */
         body::before {
             content: " ";
             display: block;
@@ -51,270 +49,138 @@
             pointer-events: none;
         }
 
-        /* حاوية اللوحة المركزية (الإطار المتوهج الأخضر بالكامل) */
+        /* إطار اللوحة المطابق للصورة تماماً */
         .crt-container {
             position: relative;
             z-index: 2;
-            width: 95%;
-            max-width: 480px;
-            background: rgba(0, 0, 0, 0.95);
-            border: 3px solid #00ff66;
+            width: 100%;
+            max-width: 440px;
+            background: #000000;
+            border: 2px solid #00ff66;
             border-radius: 28px;
-            padding: 30px 20px;
-            box-shadow: 0 0 35px rgba(0, 255, 102, 0.3), inset 0 0 20px rgba(0, 255, 102, 0.2);
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.25);
             text-align: center;
         }
 
-        /* شريط النظام الداخلي العلوي */
         .system-bar {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 11px;
+            font-size: 10px;
             color: #00ff66;
-            border-bottom: 1px dashed rgba(0, 255, 102, 0.25);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            opacity: 0.8;
+            border-bottom: 1px dashed rgba(0, 255, 102, 0.2);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            opacity: 0.7;
         }
 
-        .sys-dots { display: flex; gap: 6px; }
-        .sys-dot { width: 7px; height: 7px; border-radius: 50%; background: #00ff66; opacity: 0.3; }
-        .sys-dot.active { opacity: 1; box-shadow: 0 0 8px #ff003c; background: #ff003c; }
+        .sys-dots { display: flex; gap: 5px; }
+        .sys-dot { width: 6px; height: 6px; border-radius: 50%; background: #00ff66; opacity: 0.3; }
+        .sys-dot.active { opacity: 1; background: #00ff66; box-shadow: 0 0 8px #00ff66; }
 
-        /* ================= المشهد السينمائي الحقيقي لجمجمة شانكس والنينجا والنار الخضراء ================= */
+        /* حاوية المشهد السينمائي الحقيقي المدمج بالداخل */
         .cyber-header-scene {
-            position: relative;
             width: 100%;
-            height: 250px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: auto;
+            aspect-ratio: 400 / 230;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            position: relative;
         }
 
-        /* 1. ألسنة اللهب النيونية الخضراء الكثيفة في الخلفية الخلفية */
-        .green-fire-bg {
-            position: absolute;
+        /* استدعاء وتثبيت الصورة الثانية الحقيقية والواقعية كخلفية ثابتة ومستحيلة التلف */
+        .real-image-render {
             width: 100%;
             height: 100%;
-            background-image: url('https://img.picgo.net/2024/03/19/green-fire-aura.png'), radial-gradient(circle, rgba(0,255,102,0.35) 0%, rgba(0,0,0,0) 75%);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: drop-shadow(0 0 20px #00ff66);
-            animation: firePulse 2.5s infinite alternate;
-            z-index: 1;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.3));
         }
 
-        /* 2. مقاتلي النينجا الفخمين (يمين ويسار) بالسيوف وبتفاصيل واقعية عالية خلف الجمجمة وامام النار */
-        .ninja-guard {
-            position: absolute;
-            bottom: -5px;
-            width: 160px;
-            height: 220px;
-            background-image: url('https://i.ibb.co/bRRm6vP/cyber-ninja.png'); /* رابط مباشر لصورة نينجا واقعي سيبراني يمسك السيف */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: bottom center;
-            filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.6));
-            z-index: 2;
-        }
-
-        .ninja-left {
-            left: -20px;
-            transform: scaleX(-1); /* قلب النينجا الأيسر ليتطابق مع اتجاه الصورة ببراعة */
-        }
-
-        .ninja-right {
-            right: -20px;
-        }
-
-        /* 3. الجمجمة البشرية الواقعية الكبرى المتمركزة في المنتصف تماماً */
-        .center-skull {
-            width: 165px;
-            height: 165px;
-            background-image: url('https://i.ibb.co/vYm686Q/real-skull.png'); /* رابط مباشر لجمجمة بشرية حقيقية عالية الجودة */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            position: relative;
-            z-index: 3;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 102, 0.75));
-            animation: floatGlow 3.5s infinite alternate ease-in-out;
-        }
-
-        /* 4. ندبة شانكس الأسطورية الثلاثية الحمراء متوهجة بدقة ومحفورة فوق العين */
-        .shanks-scar {
-            position: absolute;
-            top: 25px;
-            right: 42px; /* ضبط التمركز والزاوية لتأتي فوق العين بضبط كالصورة الحقيقية */
-            width: 32px;
-            height: 45px;
-            display: flex;
-            gap: 3.5px;
-            transform: rotate(14deg);
-            z-index: 4;
-            pointer-events: none;
-        }
-
-        .scar-line {
-            width: 3.5px;
-            height: 100%;
-            background: #ff003c;
-            box-shadow: 0 0 12px #ff003c, 0 0 18px #ff003c;
-            border-radius: 4px;
-        }
-
-        /* تزيين أوراق الشجر النيون المحيطة بالاسم */
-        .leaf-decor {
-            font-size: 24px;
-            color: #00ff66;
-            opacity: 0.4;
-            display: inline-block;
-            vertical-align: middle;
-            text-shadow: 0 0 8px #00ff66;
-        }
-
-        /* نصوص وعناوين المنصة الملكية */
-        .main-title {
-            font-size: 36px;
-            font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 0 25px #00ff66, 0 0 5px #ffffff;
-            margin: 5px 10px;
-            display: inline-block;
-            letter-spacing: 4px;
-        }
-
-        .sub-title {
-            font-size: 14px;
-            color: #00ff66;
-            letter-spacing: 1.5px;
-            margin-bottom: 18px;
-            font-weight: bold;
-        }
-
-        .status-badge {
-            font-size: 11px;
-            color: #00ff66;
-            background: rgba(0, 255, 102, 0.04);
-            border: 1px solid rgba(0, 255, 102, 0.4);
-            padding: 6px 18px;
-            display: inline-block;
-            margin-bottom: 25px;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
-        }
-
-        /* هندسة وتوزيع أزرار الواجهة الفخمة */
+        /* مصفوفة الأزرار والروابط الملكية للورد KING */
         .grid-matrix {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
+            margin-top: 15px;
         }
 
         .cyber-box {
             display: block;
             width: 100%;
-            background: rgba(4, 12, 5, 0.85);
+            background: rgba(3, 8, 3, 0.9);
             border: 1.5px solid #00ff66;
             border-radius: 12px;
-            padding: 16px;
+            padding: 15px;
             color: #00ff66;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             position: relative;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: inset 0 0 8px rgba(0, 255, 102, 0.05);
+            transition: all 0.25s ease-in-out;
         }
 
-        /* زوايا التحديد السيبرانية للأزرار */
+        /* زوايا التصميم السيبراني المضيئة للأزرار */
         .cyber-box::before, .cyber-box::after {
-            content: ""; position: absolute; width: 8px; height: 8px; border-color: #00ff66; border-style: solid;
+            content: ""; position: absolute; width: 6px; height: 6px; border-color: #00ff66; border-style: solid;
         }
-        .cyber-box::before { top: -1.5px; left: -1.5px; border-width: 2px 0 0 2px; }
-        .cyber-box::after { bottom: -1.5px; right: -1.5px; border-width: 0 2px 2px 0; }
+        .cyber-box::before { top: -1.5px; left: -1.5px; border-width: 1.5px 0 0 1.5px; }
+        .cyber-box::after { bottom: -1.5px; right: -1.5px; border-width: 0 1.5px 1.5px 0; }
 
         .cyber-box span {
             display: block;
-            font-size: 10px;
+            font-size: 9px;
             color: #ffffff;
-            opacity: 0.5;
+            opacity: 0.4;
             margin-top: 5px;
             letter-spacing: 1px;
         }
 
-        /* تأثير التوهج الضوئي الكثيف عند تمرير الماوس أو اللمس */
         .cyber-box:hover {
             background: #00ff66;
             color: #000000;
-            box-shadow: 0 0 30px #00ff66;
-            transform: translateY(-2px);
+            box-shadow: 0 0 25px #00ff66;
         }
         .cyber-box:hover span {
             color: #000000;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
-        /* صندوق نافذة الهدية الملكية التفاعلي الجديد (Popup Window) */
+        /* صندوق النافذة التفاعلية للهدية الملكية */
         .gift-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.92);
+            background: rgba(0, 0, 0, 0.93);
             z-index: 100;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0; pointer-events: none;
             transition: all 0.3s ease-in-out;
-            backdrop-filter: blur(7px);
+            backdrop-filter: blur(5px);
         }
         .gift-overlay.open { opacity: 1; pointer-events: auto; }
 
         .gift-popup {
-            background: #020703;
+            background: #010602;
             border: 2px solid #ff003c;
-            padding: 35px 25px;
-            width: 90%; max-width: 400px;
+            padding: 30px 20px;
+            width: 88%; max-width: 380px;
             text-align: center;
-            border-radius: 16px;
-            box-shadow: 0 0 35px rgba(255, 0, 60, 0.4);
-            transform: scale(0.8); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 14px;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.35);
         }
-        .gift-overlay.open .gift-popup { transform: scale(1); }
 
-        .gift-popup h2 { color: #ff003c; margin-bottom: 15px; font-size: 22px; text-shadow: 0 0 10px #ff003c; }
-        .gift-popup p { color: #fff; font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
+        .gift-popup h2 { color: #ff003c; margin-bottom: 10px; font-size: 19px; text-shadow: 0 0 10px #ff003c; }
+        .gift-popup p { color: #fff; font-size: 13px; line-height: 1.5; margin-bottom: 20px; }
         
         .close-gift-btn {
-            background: #ff003c; color: #fff; border: none; padding: 12px 30px;
-            font-weight: bold; cursor: pointer; border-radius: 6px; box-shadow: 0 0 15px #ff003c;
-            font-family: 'Courier New', monospace;
-        }
-
-        /* حقوق التذييل المشفرة للمنظومة */
-        .system-footer {
-            margin-top: 35px;
-            font-size: 10px;
-            color: #00441a;
-            font-weight: bold;
-            border-top: 1px solid rgba(0, 255, 102, 0.08);
-            padding-top: 15px;
-        }
-
-        /* تأثيرات الحركة والطفو والنبض */
-        @keyframes firePulse {
-            0% { transform: scale(0.96); opacity: 0.75; }
-            100% { transform: scale(1.04); opacity: 1; }
-        }
-
-        @keyframes floatGlow {
-            0% { transform: translateY(0px); filter: drop-shadow(0 0 15px rgba(0,255,102,0.6)); }
-            100% { transform: translateY(-8px); filter: drop-shadow(0 0 28px rgba(0,255,102,0.95)); }
+            background: #ff003c; color: #fff; border: none; padding: 10px 25px;
+            font-weight: bold; cursor: pointer; border-radius: 5px; box-shadow: 0 0 12px #ff003c;
         }
     </style>
 </head>
@@ -329,28 +195,16 @@
         </div>
 
         <div class="cyber-header-scene">
-            <div class="green-fire-bg"></div>
-            
-            <div class="ninja-guard ninja-left"></div>
-
-            <div class="center-skull">
-                <div class="shanks-scar">
-                    <span class="scar-line"></span>
-                    <span class="scar-line"></span>
-                    <span class="scar-line"></span>
-                </div>
-            </div>
-
-            <div class="ninja-guard ninja-right"></div>
+            <img class="real-image-render" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAADwCAMAAADXbA3DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURf///wAAAO7u7gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAP7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJYg03wAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////sAdb6AAAACXBIWXMAABYlAAAWJQFJUitwAAAAGXRFWHRTb2Z0d2FyZQBBRG9iZSBJbWFnZVJlYWR5ccllPAAAD8dJREFUeNrtnflyG0cSxlvEg8S7uIviTeIliqIoiqIeWbYkWbYkO7IiyY52S7bixY7vI1vXp9mX2bcrN/P9H2p6AIwB9gCCg8F0f79fU6ZmsAsEun9V9esG0NOnT58+ffr06dOnT58+ffr06fOnT5+vXp++XIn6Z9N4S8151V666Wp2tW39Tfe79fR1I+idmbe3m2lE6G/D8F7m5fveb/6+96g7G7/3/V0v6Z2Z6Yg2fdfP/q7ve4/6YvD+YgR9vRF0R6L7ZtAnK0GftUffbAX9YfDNBwLpM0FftwffbI++mX3Tf969NujfBv3bYPBNf7YV9M3sm77Y3qC/CPrToD8NutI+pE/aoz8O+ofBN7/O+uI3g8GvB4PfvBl8+asXg8GvB8vBrwbL7S+2vxhsf769HGyXPwXfLgbfLgbL5ZfBNwunm4UTp5uFTfK0SZ5uBk43C6dfB043C6ebA6ebfXy6GfB06OnhZuiLw0vD/vBy2D8ctoebg4ebg9ODwWnZPw9O9/HpHmK6i0939+luPt3ZpzvbdGfLDtMvthfth9vLdpWfbsvXbvl0Wz7dlk+3B6cHw6f7+HTvT3f3fXqP6T0+vcfv0Xv8m69fDAb/fDEY/O7F8K3T7S9Ot7843dYvTrflU5N8vEmebpKnG6dbO91sv6LTrp1utreXg7eHlwP/66G/+XroywG+v/E/B/g+/5b6v9D/g5v6D/9W+g9p7G8b23+I+pvkb68O0N9y87cbv93G9rfN6beN6beR/tY+M/O9ffqZ7+2zz2zZHzbJD5vkB0nyvST5XhL7mIvsLxfZ/izb/WmW7WbZbpbt/uG/9P8A/UOy/SBZ/fFvk9WvR8b+uE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" alt="Cyber Image">
         </div>
 
         <div>
-            <span class="leaf-decor">🌿</span>
-            <h1 class="main-title">KING</h1>
-            <span class="leaf-decor">🌿</span>
+            <span style="font-size:20px; text-shadow:0 0 10px #00ff66;">🌿</span>
+            <h1 style="font-size:38px; font-weight:900; color:#ffffff; text-shadow:0 0 20px #00ff66; display:inline-block; letter-spacing:4px;">KING</h1>
+            <span style="font-size:20px; text-shadow:0 0 10px #00ff66;">🌿</span>
         </div>
-        <p class="sub-title">المنصة السيبرانية الرسمية للورد KING</p>
-        <div class="status-badge">CORE STATUS: ACTIVE // NO_VPN_BYPASS [ONLINE]</div>
+        <p style="font-size:13px; color:#00ff66; letter-spacing:1px; margin-bottom:12px; font-weight:bold;">المنصة السيبرانية الرسمية للورد KING</p>
+        <div style="font-size:11px; color:#00ff66; background:rgba(0, 255, 102, 0.03); border:1px dashed rgba(0, 255, 102, 0.4); padding:5px 15px; display:inline-block; margin-bottom:22px; border-radius:4px;">CORE STATUS: ACTIVE // NO_VPN_BYPASS [ONLINE]</div>
 
         <div class="grid-matrix">
             <a href="https://t.me/King1500hackBOT" target="_blank" class="cyber-box">
@@ -369,7 +223,7 @@
             </a>
         </div>
 
-        <div class="system-footer">
+        <div style="margin-top:25px; font-size:10px; color:#00441a; font-weight:bold; border-top:1px solid rgba(0, 255, 102, 0.08); padding-top:10px;">
             ZYROS MATRIX // SECURE CONNECTION APPLIED TO 2026 © LORD KING
         </div>
     </div>
@@ -383,7 +237,6 @@
     </div>
 
     <script>
-        // نظام توليد الـ Matrix المتساقط بالخلفية تلقائياً
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -414,20 +267,10 @@
             canvas.height = window.innerHeight;
         });
 
-        // تشغيل وإغلاق نافذة الهدية التفاعلية
-        function openGift() {
-            document.getElementById('giftOverlay').classList.add('open');
-        }
-        function closeGift() {
-            document.getElementById('giftOverlay').classList.remove('open');
-        }
-        function closeGiftOutside(e) {
-            if(e.target.id === 'giftOverlay') closeGift();
-        }
-        function goToDeveloper() {
-            window.open('https://t.me/FXK_I', '_blank');
-            closeGift();
-        }
+        function openGift() { document.getElementById('giftOverlay').classList.add('open'); }
+        function closeGift() { document.getElementById('giftOverlay').classList.remove('open'); }
+        function closeGiftOutside(e) { if(e.target.id === 'giftOverlay') closeGift(); }
+        function goToDeveloper() { window.open('https://t.me/FXK_I', '_blank'); closeGift(); }
     </script>
 </body>
 </html>
