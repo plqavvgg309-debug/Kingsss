@@ -108,59 +108,31 @@
             letter-spacing: 1px;
         }
 
-        /* الهيدر الحيوي - تفكيك وتحريك الصورة الثانية */
+        /* الهيدر الحيوي - استدعاء صورة النينجا والجمجمة الواقعية المباشرة */
         .dynamic-scene {
             position: relative;
             width: 100%;
             height: 250px;
-            background: #000;
+            background-color: #000;
+            /* تم ربط الصورة الواقعية المطلوبة مباشرة بدقة عالية */
+            background-image: url('https://raw.githubusercontent.com/Z-Eye-Project/Assets/main/king_skull_ninja.png');
+            background-size: cover;
+            background-position: center;
             border-radius: 14px;
             overflow: hidden;
-            border: 1px solid rgba(0, 255, 102, 0.3);
+            border: 2px solid rgba(0, 255, 102, 0.5);
             margin-bottom: 20px;
+            box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.4), 0 0 15px rgba(0, 255, 102, 0.3);
+            animation: scenePulse 3s infinite alternate ease-in-out;
         }
 
-        /* الدخان والنيران الخضراء التحتية المتحركة */
-        .fire-bg {
+        /* تأثير وهج ناري أخضر إضافي فوق الصورة للواقعية */
+        .dynamic-scene::after {
+            content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAADwCAMAAADXbA3DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURf///wAAAO7u7gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAP7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJYg03wAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////sAdb6AAAACXBIWXMAABYlAAAWJQFJUitwAAAAGXRFWHRTb2Z0d2FyZQBBRG9iZSBJbWFnZVJlYWR5ccllPAAAD8dJREFUeNrtnflyG0cSxlvEg8S7uIviTeIliqIoiqIeWbYkWbYkO7IiyY52S7bixY7vI1vXp9mX2bcrN/P9H2p6AIwB9gCCg8F0f79fU6ZmsAsEun9V9esG0NOnT58+ffr06dOnT58+ffr06fOnT5+vXp++XIn6Z9N4S8151V666Wp2tW39Tfe79fR1I+idmbe3m2lE6G/D8F7m5fveb/6+96g7G7/3/V0v6Z2Z6Yg2fdfP/q7ve4/6YvD+YgR9vRF0R6L7ZtAnK0GftUffbAX9YfDNBwLpM0FftwffbI++mX3Tf969NujfBv3bYPBNf7YV9M3sm77Y3qC/CPrToD8NutI+pE/aoz8O+ofBN7/O+uI3g8GvB4PfvBl8+asXg8GvB8vBrwbL7S+2vxhsf769HGyXPwXfLgbfLgbL5ZfBNwunm4UTp5uFTfK0SZ5uBk43C6dfB043C6ebA6ebfXy6GfB06OnhZuiLw0vD/vBy2D8ctoebg4ebg9ODwWnZPw9O9/HpHmK6i0939+luPt3ZpzvbdGfLDtMvthfth9vLdpWfbsvXbvl0Wz7dlk+3B6cHw6f7+HTvT3f3fXqP6T0+vcfv0Xv8m69fDAb/fDEY/O7F8K3T7S9Ot7843dYvTrflU5N8vEmebpKnG6dbO91sv6LTrp1utreXg7eHlwP/66G/+XroywG+v/E/B/g+/5b6v9D/g5v6D/9W+g9p7G8b23+I+pvkb68O0N9y87cbv93G9rfN6beN6beR/tY+M/O9ffqZ7+2zz2zZHzbJD5vkB0nyvST5XhL7mIvsLxfZ/izb/WmW7WbZbpbt/uG/9P8A/UOy/SBZ/fFvk9WvR8b+uE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');
-            background-size: cover;
-            mix-blend-mode: color-dodge;
-            opacity: 0.45;
-            animation: fireWobble 2.5s infinite alternate ease-in-out;
-        }
-
-        /* نينجا اليمين واليسار (مستخلص ومتحرك بشكل منفصل) */
-        .ninja-left, .ninja-right {
-            position: absolute;
-            bottom: -5px;
-            width: 45%;
-            height: 90%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAADwCAMAAADXbA3DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURf///wAAAO7u7gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAP7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJYg03wAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////sAdb6AAAACXBIWXMAABYlAAAWJQFJUitwAAAAGXRFWHRTb2Z0d2FyZQBBRG9iZSBJbWFnZVJlYWR5ccllPAAAD8dJREFUeNrtnflyG0cSxlvEg8S7uIviTeIliqIoiqIeWbYkWbYkO7IiyY52S7bixY7vI1vXp9mX2bcrN/P9H2p6AIwB9gCCg8F0f79fU6ZmsAsEun9V9esG0NOnT58+ffr06dOnT58+ffr06fOnT5+vXp++XIn6Z9N4S8151V666Wp2tW39Tfe79fR1I+idmbe3m2lE6G/D8F7m5fveb/6+96g7G7/3/V0v6Z2Z6Yg2fdfP/q7ve4/6YvD+YgR9vRF0R6L7ZtAnK0GftUffbAX9YfDNBwLpM0FftwffbI++mX3Tf969NujfBv3bYPBNf7YV9M3sm77Y3qC/CPrToD8NutI+pE/aoz8O+ofBN7/O+uI3g8GvB4PfvBl8+asXg8GvB8vBrwbL7S+2vxhsf769HGyXPwXfLgbfLgbL5ZfBNwunm4UTp5uFTfK0SZ5uBk43C6dfB043C6ebA6ebfXy6GfB06OnhZuiLw0vD/vBy2D8ctoebg4ebg9ODwWnZPw9O9/HpHmK6i0939+luPt3ZpzvbdGfLDtMvthfth9vLdpWfbsvXbvl0Wz7dlk+3B6cHw6f7+HTvT3f3fXqP6T0+vcfv0Xv8m69fDAb/fDEY/O7F8K3T7S9Ot7843dYvTrflU5N8vEmebpKnG6dbO91sv6LTrp1utreXg7eHlwP/66G/+XroywG+v/E/B/g+/5b6v9D/g5v6D/9W+g9p7G8b23+I+pvkb68O0N9y87cbv93G9rfN6beN6beR/tY+M/O9ffqZ7+2zz2zZHzbJD5vkB0nyvST5XhL7mIvsLxfZ/izb/WmW7WbZbpbt/uG/9P8A/UOy/SBZ/fFvk9WvR8b+uE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');
-            background-size: 230% auto;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 102, 0.4));
-        }
-        .ninja-left {
-            left: 5px;
-            background-position: 5% 72%;
-            animation: ninjaMoveLeft 4s infinite alternate ease-in-out;
-        }
-        .ninja-right {
-            right: 5px;
-            background-position: 95% 72%;
-            animation: ninjaMoveRight 4s infinite alternate ease-in-out;
-        }
-
-        /* الجمجمة الوسطى المتنفسة والنابضة بـ Glitch خفيف */
-        .skull-center {
-            position: absolute;
-            top: 5%; left: 25%; width: 50%; height: 80%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAADwCAMAAADXbA3DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURf///wAAAO7u7gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAP7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJYg03wAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////sAdb6AAAACXBIWXMAABYlAAAWJQFJUitwAAAAGXRFWHRTb2Z0d2FyZQBBRG9iZSBJbWFnZVJlYWR5ccllPAAAD8dJREFUeNrtnflyG0cSxlvEg8S7uIviTeIliqIoiqIeWbYkWbYkO7IiyY52S7bixY7vI1vXp9mX2bcrN/P9H2p6AIwB9gCCg8F0f79fU6ZmsAsEun9V9esG0NOnT58+ffr06dOnT58+ffr06fOnT5+vXp++XIn6Z9N4S8151V666Wp2tW39Tfe79fR1I+idmbe3m2lE6G/D8F7m5fveb/6+96g7G7/3/V0v6Z2Z6Yg2fdfP/q7ve4/6YvD+YgR9vRF0R6L7ZtAnK0GftUffbAX9YfDNBwLpM0FftwffbI++mX3Tf969NujfBv3bYPBNf7YV9M3sm77Y3qC/CPrToD8NutI+pE/aoz8O+ofBN7/O+uI3g8GvB4PfvBl8+asXg8GvB8vBrwbL7S+2vxhsf769HGyXPwXfLgbfLgbL5ZfBNwunm4UTp5uFTfK0SZ5uBk43C6dfB043C6ebA6ebfXy6GfB06OnhZuiLw0vD/vBy2D8ctoebg4ebg9ODwWnZPw9O9/HpHmK6i0939+luPt3ZpzvbdGfLDtMvthfth9vLdpWfbsvXbvl0Wz7dlk+3B6cHw6f7+HTvT3f3fXqP6T0+vcfv0Xv8m69fDAb/fDEY/O7F8K3T7S9Ot7843dYvTrflU5N8vEmebpKnG6dbO91sv6LTrp1utreXg7eHlwP/66G/+XroywG+v/E/B/g+/5b6v9D/g5v6D/9W+g9p7G8b23+I+pvkb68O0N9y87cbv93G9rfN6beSubv/m6x+M/3bvf3V98b7e/Tf9v8OfV/of0H9Lbc/O3Gb7exvW1z+m1j+m2kv7XPzHxvn37me/vsM1v2h03ywyb5QZJ8L0m+l8Q+5iL7y0W2P8t2f5plu1m2m2W7f/gv/T9A/5BsP0hWf/zbZPWrkbE/7pM/nvMvf5onz8+nn//nyP523pH9TVF/O++o/mYw+pvB8OnzfxwN/3ZmfzscufPusHbe2bCz4aCzYWflcBCclWf9YRCc+Q8djIKzUXDmz0blb1ODTwb9F382+vjpmf9+9NNTff1s9E0/Pd37u+mXv5kO/vbFM//1oP/rf3vB//Dnb/5vf3/q//Q/T6L+6Wj230ej/zya/Wo0/eLlZPrqYDrov/IfTAeDV+azwW/M9rHVbM/PRoPblgpvzka+/b/9r/2v/K+P///8vD78v94bvv9wZvn79//v///+7p/v7w//9m+H8CDADxM/lbeuEw5gAAAABJRU5ErkJggg==');
-            background-size: 200% auto;
-            background-position: 50% 28%;
-            filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.6));
-            animation: skullBreathe 3s infinite alternate ease-in-out, cyberGlitchEffect 6s infinite linear;
+            background: radial-gradient(circle, transparent 40%, rgba(0, 30, 10, 0.7) 90%);
+            pointer-events: none;
         }
 
         /* نصوص العناوين والنظام مع Typing Animation */
@@ -295,20 +267,13 @@
             0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 102, 0.2); border-color: #00ff66; }
             50% { box-shadow: 0 0 40px rgba(0, 255, 102, 0.5); border-color: #00ffaa; }
         }
-        @keyframes fireWobble {
-            0% { transform: scale(1) translateY(0) rotate(0deg); opacity: 0.4; }
-            100% { transform: scale(1.08) translateY(-4px) rotate(1deg); opacity: 0.55; }
+        
+        /* أنيميشن تنفس ونبض الصورة الواقعية للهيدر */
+        @keyframes scenePulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,255,102,0.2)) saturate(1); }
+            100% { transform: scale(1.02); filter: drop-shadow(0 0 15px rgba(0,255,102,0.5)) saturate(1.2); }
         }
-        @keyframes skullBreathe {
-            0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.5)); }
-            100% { transform: translateY(-7px) scale(1.03); filter: drop-shadow(0 0 22px #00ff66); }
-        }
-        @keyframes ninjaMoveLeft {
-            0% { transform: translateX(0) scale(1); } 100% { transform: translateX(-4px) scale(1.02); }
-        }
-        @keyframes ninjaMoveRight {
-            0% { transform: translateX(0) scale(1); } 100% { transform: translateX(4px) scale(1.02); }
-        }
+
         @keyframes btnShineGlitch {
             0% { transform: translate(0) skew(0deg); }
             20% { transform: translate(-1px, 1px) skew(-1deg); }
@@ -316,12 +281,6 @@
             60% { transform: translate(-1px, -1px) skew(0deg); }
             80% { transform: translate(1px, 1px) skew(1deg); }
             100% { transform: translate(0) skew(0deg); }
-        }
-        @keyframes cyberGlitchEffect {
-            0%, 92%, 100% { filter: hue-rotate(0deg) saturate(1); }
-            93% { filter: hue-rotate(90deg) saturate(1.3); transform: scaleX(1.04); }
-            95% { filter: hue-rotate(-40deg) saturate(1.5); transform: scaleY(0.97); }
-            97% { filter: hue-rotate(180deg) saturate(1); }
         }
     </style>
 </head>
@@ -337,121 +296,3 @@
 
     <div class="cyber-panel">
         <div class="panel-header">
-            <div>⚙️ CORE_v4.0.SYS</div>
-            <div>[ONLINE]</div>
-        </div>
-
-        <div class="dynamic-scene">
-            <div class="fire-bg"></div>
-            <div class="ninja-left"></div>
-            <div class="ninja-right"></div>
-            <div class="skull-center"></div>
-        </div>
-
-        <div class="title-container">
-            🌿 <h1>KING</h1> 🌿
-        </div>
-        <div class="sub-title">المنصة السيبرانية الرسمية للورد KING</div>
-        <div class="status-badge">CORE STATUS: ACTIVE // NO_VPN_BYPASS</div>
-
-        <div class="action-matrix">
-            <a href="https://t.me/King1500hackBOT" target="_blank" class="cyber-btn" onclick="playGlitchAudio()">
-                تشغيل بوت المساعد الملكي 🤖
-                <span>LAUNCH KING BOT</span>
-            </a>
-
-            <div class="cyber-btn" onclick="openGiftBox()">
-                🎁 الهدية الملكية: اطلب أدواتك البايثون
-                <span>. . . OPEN GIFT BOX</span>
-            </div>
-
-            <a href="https://t.me/FXK_I" target="_blank" class="cyber-btn" onclick="playGlitchAudio()">
-                التواصل المباشر مع اللورد KING 👑
-                <span>CONTACT LORD KING</span>
-            </a>
-        </div>
-
-        <div class="footer-credits">
-            ZYROS MATRIX // SECURE CONNECTION APPLIED TO 2026 © LORD KING
-        </div>
-    </div>
-
-    <div id="giftOverlay" class="overlay" onclick="closeGiftOutside(event)">
-        <div class="popup-box">
-            <h2>🎁 الهدية الملكية الخاصة 🎁</h2>
-            <p>هديتك هي أي أداة بايثون تفكر بها سأصنعها لك، فقط راسل مطور البوت واطلبها الآن سيدي.</p>
-            <button class="popup-btn" onclick="goToDeveloperAccount()">مراسلة المطور فوراً</button>
-        </div>
-    </div>
-
-    <audio id="glitch-sound" src="glitch.wav" preload="auto"></audio>
-
-    <script>
-        // أنيميشن شاشة التحميل ومحاكاة التيرمينال
-        const term = document.getElementById('terminal-text');
-        const lines = [
-            "Connecting to ZYROS matrix server...",
-            "Bypassing firewalls [NO_VPN_BYPASS]...",
-            "Injecting core assets v4.0...",
-            "Loading Lord KING visual engine...",
-            "ACCESS GRANTED."
-        ];
-        let lineIdx = 0;
-        function typeTerminal() {
-            if(lineIdx < lines.length) {
-                term.innerHTML += lines[lineIdx] + "<br>";
-                lineIdx++;
-                setTimeout(typeTerminal, 450);
-            }
-        }
-        typeTerminal();
-
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loading-screen');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-                playGlitchAudio();
-            }, 2500);
-        });
-
-        // تشغيل صوت الـ Glitch
-        function playGlitchAudio() {
-            const audio = document.getElementById('glitch-sound');
-            audio.currentTime = 0;
-            audio.play().catch(() => console.log("انقر على الشاشة لتفعيل الصوت"));
-        }
-
-        // خلفية الماتريكس التفاعلية
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const matrixChars = "01010101010101";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(1, 4, 1, 0.06)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00ff66';
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                const txt = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
-                ctx.fillText(txt, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 30);
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-
-        // نوافذ الهدية والأزرار
-        function openGiftBox() { playGlitchAudio(); document.getElementById('giftOverlay').classList.add('active'); }
-        function closeGiftBox() { document.getElementById('giftOverlay').classList.remove('active'); }
-        function closeGiftOutside(e) { if(e.target.id === 'giftOverlay') closeGiftBox(); }
-        function goToDeveloperAccount() { window.open('https://t.me/FXK_I', '_blank'); closeGiftBox(); }
-    </script>
-</body>
-</html>
